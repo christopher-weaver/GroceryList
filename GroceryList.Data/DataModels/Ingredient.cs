@@ -15,7 +15,8 @@ namespace GroceryList.Data.DataModels
         [Required]
         public string Name { get; set; }
 
-        public decimal GramsRemaining { get; set; }
+        // Amount required for recipe or remaining in pantry
+        public decimal Grams { get; set; }
 
         public decimal Cost { get; set; }
 

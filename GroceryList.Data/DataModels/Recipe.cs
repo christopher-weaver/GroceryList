@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace GroceryList.Data.DataModels
 {
-    public class Recipe
+    public class Recipe : IIngredientList
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        public string RecipeName { get; set; }
 
         [ForeignKey(nameof(Ingredients))]
         public List<int> IngredientIds { get; set; }
