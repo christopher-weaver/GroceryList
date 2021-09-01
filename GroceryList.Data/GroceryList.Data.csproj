@@ -94,6 +94,18 @@
     <Compile Include="Migrations\202108312211403_InitialMigration.Designer.cs">
       <DependentUpon>202108312211403_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108312319526_AddedUserId.cs" />
+    <Compile Include="Migrations\202108312319526_AddedUserId.Designer.cs">
+      <DependentUpon>202108312319526_AddedUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108312338088_EditedIngredientClass.cs" />
+    <Compile Include="Migrations\202108312338088_EditedIngredientClass.Designer.cs">
+      <DependentUpon>202108312338088_EditedIngredientClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108312344226_FurtherEditedIngredientClass.cs" />
+    <Compile Include="Migrations\202108312344226_FurtherEditedIngredientClass.Designer.cs">
+      <DependentUpon>202108312344226_FurtherEditedIngredientClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -104,6 +116,19 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202108312211403_InitialMigration.resx">
       <DependentUpon>202108312211403_InitialMigration.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108312319526_AddedUserId.resx">
+      <DependentUpon>202108312319526_AddedUserId.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108312338088_EditedIngredientClass.resx">
+      <DependentUpon>202108312338088_EditedIngredientClass.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108312344226_FurtherEditedIngredientClass.resx">
+      <DependentUpon>202108312344226_FurtherEditedIngredientClass.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,5 +10,6 @@ namespace GroceryList.Data.DataModels
     {
         int Id { get; set; }
         List<Ingredient> Ingredients { get; set; }
+        Guid UserId { get; set; }
     }
 }
