@@ -1,0 +1,63 @@
+﻿using GroceryList.Data;
+using GroceryList.Data.DataModels;
+using GroceryList.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GroceryList.Services
+{
+    public class RecipeService
+    {
+        private readonly Guid _userId;
+        public RecipeService(Guid _userId)
+        {
+            _userId = userId;
+        }
+
+
+        public bool CreateRecipe(RecipeCreate model)
+        {
+            var entity =
+                    new Recipe()
+                    {
+                        OwnerId = _userId,
+                        RecipeName = model.RecipeName,
+                        List < Ingredient > = model.List<Ingredient>,
+                        CreatedUtc = DateTimeOffset.Now
+                    };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Recipe.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public IEnumerable<RecipeListItem> GetRecipes()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                        ctx
+                        .Recipes
+                        .Where(e => e.UserId == _userId)
+                        .Select(
+                            e =>
+                                new RecipeListItem
+                                {
+                                   Id = e.Id,
+                                   RecipeName = e.RecipeName,
+                                   CreatedUtc = e.CreatedUtc
+                                }
+                            );
+                return query.ToArray();
+
+
+        }
+    }
+
+}
+}
