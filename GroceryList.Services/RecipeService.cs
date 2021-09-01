@@ -12,7 +12,7 @@ namespace GroceryList.Services
     public class RecipeService
     {
         private readonly Guid _userId;
-        public RecipeService(Guid _userId)
+        public RecipeService(Guid userId)
         {
             _userId = userId;
         }
@@ -23,7 +23,7 @@ namespace GroceryList.Services
             var entity =
                     new Recipe()
                     {
-                        OwnerId = _userId,
+                        Id = _userId,
                         RecipeName = model.RecipeName,
                         List < Ingredient > = model.List<Ingredient>,
                         CreatedUtc = DateTimeOffset.Now
@@ -31,7 +31,7 @@ namespace GroceryList.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Recipe.Add(entity);
+                ctx.Recipes.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
