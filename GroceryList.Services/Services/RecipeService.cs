@@ -23,10 +23,9 @@ namespace GroceryList.Services
             var entity =
                     new Recipe()
                     {
-                        Id = _userId,
+                        UserId = _userId,
                         RecipeName = model.RecipeName,
-                        List < Ingredient > = model.List<Ingredient>,
-                        CreatedUtc = DateTimeOffset.Now
+                        Ingredients = model.Ingredients
                     };
 
             using (var ctx = new ApplicationDbContext())
@@ -48,16 +47,13 @@ namespace GroceryList.Services
                             e =>
                                 new RecipeListItem
                                 {
-                                   Id = e.Id,
-                                   RecipeName = e.RecipeName,
-                                   CreatedUtc = e.CreatedUtc
+                                    Id = e.Id,
+                                    RecipeName = e.RecipeName
                                 }
                             );
                 return query.ToArray();
-
-
+            }
         }
-    }
 
-}
+    }
 }

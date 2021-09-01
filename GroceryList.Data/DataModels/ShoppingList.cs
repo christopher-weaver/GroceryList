@@ -16,13 +16,13 @@ namespace GroceryList.Data.DataModels
         [Required]
         public DateTime DateOfTrip { get; set; }
 
-        [Required]
-        public Guid UserId { get; set; }
-
         [ForeignKey(nameof(Ingredients))]
         public List<int> IngredientIds { get; set; }
         public virtual List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
         public string StoreName { get; set; }
+
+        [Required]
+        public Guid UserId { get; set; }
     }
 }
