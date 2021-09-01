@@ -1,6 +1,7 @@
 ﻿using GroceryList.Data;
 using GroceryList.Data.DataModels;
 using GroceryList.Models;
+using GroceryList.Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +22,16 @@ namespace GroceryList.Services
         {
             var entity = new ShoppingList
             {
+                UserId = _userId,
                 StoreName = shoppingList.StoreName,
                 Ingredients = shoppingList.Ingredients,
-                DateOfTrip = shoppingList.DateOfTrip
+                DateOfTrip = shoppingList.DateOfTrip,
             };
 
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.ShoppingLists.Add(entity);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >= 1;
             }
         }
 
@@ -46,7 +48,16 @@ namespace GroceryList.Services
                         new ShoppingListItem
                         {
                             Id = e.Id,
-                            StoreName = e.StoreName
+                            DateOfTrip = e.DateOfTrip,
+                            StoreName = e.StoreName,
+                            Ingredients = e.Ingredients
+                                           .Select(i =>
+                                                     new IngredientDisplay
+                                                     {
+                                                        Name = i.Name,
+                                                        Grams = i.Grams,
+                                                        Cost = i.Cost
+                                                     }).ToList()
                         }
 
                     );
