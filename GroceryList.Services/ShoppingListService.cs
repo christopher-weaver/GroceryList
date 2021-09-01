@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GroceryList.Services
 {
-   public class ShoppingListService
+    public class ShoppingListService
     {
         private readonly Guid _userId;
         public ShoppingListService(Guid userId)
@@ -17,7 +17,7 @@ namespace GroceryList.Services
             _userId = userId;
         }
 
-        public bool Post(ShoppingListCreate shoppingList)
+        public bool CreateShoppingList(ShoppingListCreate shoppingList)
         {
             var entity = new ShoppingList
             {
@@ -37,21 +37,51 @@ namespace GroceryList.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = 
+                var query =
                     ctx
                     .ShoppingLists
-                    
+                    .Where(e => e.UserId == _userId)
+                    .Select(
+                        e =>
+                        new ShoppingListItem
+                        {
+                            Id = e.Id,
+                            StoreName = e.StoreName
+                        }
+
+                    );
+                return query.ToArray();
             }
         }
 
-        public bool EditComment(ShoppingListEdit model)
+        public bool UpdateShoppingList(ShoppingListEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .ShoppingLists
-                    
+                    .Single(e => e.Id == model.Id && e.UserId == _userId);
+
+                entity.Id = model.Id;
+                entity.StoreName = model.StoreName;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteShoppingList(int shoppingListId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .ShoppingLists
+                    .Single(e => e.Id == shoppingListId && e.UserId == _userId);
+
+                ctx.ShoppingLists.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }
