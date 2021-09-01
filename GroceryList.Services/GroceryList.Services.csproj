@@ -56,13 +56,21 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingListService.cs" />
+    <Compile Include="Services\IngredientService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\GroceryList.Data\GroceryList.Data.csproj">
+      <Project>{B292BFC3-8B8F-46AF-A8D7-DE26120B57F1}</Project>
+      <Name>GroceryList.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GroceryList.Models\GroceryList.Models.csproj">
+      <Project>{17267d07-92a7-47b9-9b29-21d937527355}</Project>
+      <Name>GroceryList.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GroceryList.Data\GroceryList.Data.csproj">

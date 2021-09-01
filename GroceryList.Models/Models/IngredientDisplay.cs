@@ -5,18 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GroceryList.Data.DataModels
+namespace GroceryList.Services.Services
 {
-    public class Ingredient
+    public class IngredientDisplay
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
-
-        [Required]
-        public Guid UserId { get; set; }
 
         // Amount required for recipe or remaining in pantry
         public decimal Grams { get; set; }

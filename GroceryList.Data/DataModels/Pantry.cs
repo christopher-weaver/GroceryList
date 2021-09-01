@@ -13,6 +13,9 @@ namespace GroceryList.Data.DataModels
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        public Guid UserId { get; set; }
+
         [ForeignKey(nameof(Ingredients))]
         public List<int> IngredientIds { get; set; }
         public virtual List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
