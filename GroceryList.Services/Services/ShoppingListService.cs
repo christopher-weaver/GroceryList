@@ -76,8 +76,23 @@ namespace GroceryList.Services
 
                 entity.Id = model.Id;
                 entity.StoreName = model.StoreName;
+                entity.DateOfTrip = model.DateOfTrip;
 
-                return ctx.SaveChanges() == 1;
+                for (var i = 0; i < entity.Ingredients.Count; i++)
+                {
+                    var ingredientId = entity.Ingredients[i].Id;
+
+                    var ingredientToDelete =
+                    ctx
+                        .Ingredients
+                        .Single(d => d.Id == ingredientId && d.UserId == _userId);
+
+                    ctx.Ingredients.Remove(ingredientToDelete);
+                }
+
+                entity.Ingredients = model.Ingredients;
+
+                return ctx.SaveChanges() >= 1;
             }
         }
 
@@ -85,14 +100,26 @@ namespace GroceryList.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity =
+                var shoppingListQry =
                     ctx
                     .ShoppingLists
-                    .Single(e => e.Id == shoppingListId && e.UserId == _userId);
+                    .Single(s => s.Id == shoppingListId && s.UserId == _userId);
 
-                ctx.ShoppingLists.Remove(entity);
+                for (var i = 0; i < shoppingListQry.Ingredients.Count; i++)
+                {
+                    var ingredientId = shoppingListQry.Ingredients[i].Id;
 
-                return ctx.SaveChanges() == 1;
+                    var ingredientToDelete =
+                    ctx
+                        .Ingredients
+                        .Single(d => d.Id == ingredientId && d.UserId == _userId);
+
+                    ctx.Ingredients.Remove(ingredientToDelete);
+                }
+
+                ctx.ShoppingLists.Remove(shoppingListQry);
+
+                return ctx.SaveChanges() >= 1;
             }
         }
     }

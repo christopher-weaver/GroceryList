@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\RecipeEdit.cs" />
     <Compile Include="Models\ShoppingListCreate.cs" />
     <Compile Include="Models\IngredientCreate.cs" />
     <Compile Include="Models\IngredientDisplay.cs" />

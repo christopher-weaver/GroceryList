@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroceryList.Services.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace GroceryList.Models
         public int Id { get; set; }
 
         public string RecipeName { get; set; }
+
+        public List<IngredientDisplay> Ingredients { get; set; }
     }
 }

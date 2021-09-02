@@ -1,20 +1,19 @@
 ﻿using GroceryList.Data.DataModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GroceryList.Models
+namespace GroceryList.Models.Models
 {
-    public class RecipeCreate
+    public class RecipeEdit
     {
-        [Required]
+        public int Id { get; set; }
+
         public string RecipeName { get; set; }
 
-        [Required]
-        public virtual List<Ingredient> Ingredients { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
 
     }
 }

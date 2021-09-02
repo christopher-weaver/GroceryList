@@ -9,8 +9,6 @@ namespace GroceryList.Services.Services
 {
     public class IngredientDisplay
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         // Amount required for recipe or remaining in pantry
