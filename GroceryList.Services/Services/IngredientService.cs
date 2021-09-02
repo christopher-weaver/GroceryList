@@ -44,7 +44,6 @@ namespace GroceryList.Services.Services
                 var query = ctx.Ingredients
                                .Select(d => new IngredientDisplay
                                {
-                                   Id = d.Id,
                                    Name = d.Name,
                                    Grams = d.Grams,
                                    Cost = d.Cost,
