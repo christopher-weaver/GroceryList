@@ -65,6 +65,48 @@ namespace GroceryList.Services
             }
         }
 
+        public IEnumerable<RecipeListItem> GetRecipesByIngredient(string ingredient)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                        ctx
+                        .Recipes
+                        .Where(e => e.UserId == _userId)
+                        .Select(
+                            e =>
+                                new RecipeListItem
+                                {
+                                    Id = e.Id,
+                                    RecipeName = e.RecipeName,
+                                    Ingredients = e.Ingredients
+                                           .Select(i =>
+                                                     new IngredientDisplay
+                                                     {
+                                                         Name = i.Name,
+                                                         Grams = i.Grams,
+                                                         Cost = i.Cost
+                                                     }).ToList()
+                                }
+                            );
+
+                var listOfRecipes = new List<RecipeListItem>();
+
+                foreach (var recipe in query)
+                {
+                    foreach (var ingred in recipe.Ingredients)
+                    {
+                        if (ingred.Name.Contains(ingredient))
+                        {
+                            listOfRecipes.Add(recipe);
+                            break;
+                        }
+                    }
+                }
+
+                return listOfRecipes.ToArray();
+            }
+        }
 
         public bool UpdateRecipe(RecipeEdit model)
         {
