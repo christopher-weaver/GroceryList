@@ -1,4 +1,5 @@
 ﻿using GroceryList.Models;
+using GroceryList.Models.Models;
 using GroceryList.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -48,5 +49,26 @@ namespace GroceryList.WebAPI.Controllers
             return Ok();
         }
 
+        public IHttpActionResult Put(RecipeEdit recipe)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateRecipeService();
+
+            if (!service.UpdateRecipe(recipe))
+                return InternalServerError();
+
+            return Ok();
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateRecipeService();
+            if (!service.DeleteRecipe(id))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
 }
